@@ -459,7 +459,43 @@
         padding-right: 20px;
     }
 }
-</style>
+
+/* Abstract paragraph hover effects */
+.section .content p {
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.section .content p:hover {
+  transform: scale(1.02);
+  background-color: rgba(52, 152, 219, 0.05);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+  padding: 12px 16px;
+}
+
+/* Also make the list items in the abstract reactive */
+.section .content ul {
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.section .content ul:hover {
+  transform: scale(1.02);
+  background-color: rgba(52, 152, 219, 0.05);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+  padding: 12px 16px;
+}
+
+/* Make sure the hover doesn't interfere with text selection */
+.section .content p:hover,
+.section .content ul:hover {
+  cursor: default;
+}
+  </style>
 </head>
 <body>
 
@@ -537,6 +573,36 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Abstract Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="content">
+      <h2 class="title is-3" style="text-align: center; margin-bottom: 30px;">Abstract</h2>
+      <p style="text-align: justify; line-height: 1.8; font-size: 1.1em;">
+        While continuous diffusion has shown remarkable success in continuous domains such as image generation, its direct application to discrete data has underperformed compared to purely discrete formulations. 
+        This gap is counterintuitive, given that continuous diffusion learns score functions that enable joint evolution across multiple positions. 
+      </p>
+      <p style="text-align: justify; line-height: 1.8; font-size: 1.1em;">
+        To understand this gap, we introduce <em>token identifiability</em> as an analytical framework for understanding how Gaussian noise corrupts discrete data through two mechanisms.
+      </p>
+      <ul style="text-align: justify; line-height: 1.8; font-size: 1.1em;">
+        <li><strong>Discrete Identity Corruption:</strong> Is an incorrect token closest to the noisy latent?</li>
+        <li><strong>Continuous Rank Degradation:</strong> How many incorrect tokens are closer to the noisy latent?</li>
+      </ul>
+      <p style="text-align: justify; line-height: 1.8; font-size: 1.1em;">
+        We reveal that these mechanisms scale differently with vocabulary size, creating a <em>temporal dissonance</em>: at noise levels where discrete corruption preserves enough structure for conditional learning, continuous denoising is trivial; at noise levels where continuous denoising is meaningful, discrete corruption destroys nearly all conditional structure. 
+      </p>
+      <p style="text-align: justify; line-height: 1.8; font-size: 1.1em;">
+        To solve this, we propose <em>CANDI</em> (<strong>C</strong>ontinuous <strong>AN</strong>d <strong>D</strong>iscrete <strong>I</strong>diffusion), a hybrid framework that decouples discrete and continuous corruption, enabling simultaneous learning of both conditional structure and continuous geometry. 
+        We empirically validate the temporal dissonance phenomenon and demonstrate that CANDI successfully avoids it.
+      </p>
+      <p style="text-align: justify; line-height: 1.8; font-size: 1.1em;">
+        This unlocks the benefits of continuous diffusion for discrete spaces: on controlled generation, CANDI enables classifier-based guidance with off-the-shelf classifiers through simple gradient addition; on text generation, CANDI outperforms masked diffusion at low NFE, demonstrating the value of learning continuous gradients for discrete spaces.      
+      </p>
     </div>
   </div>
 </section>
