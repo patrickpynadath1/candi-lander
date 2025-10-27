@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Your research project description here">
+  <meta name="keywords" content="Your, Keywords, Here">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CANDI</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <style>
+  .tldr-section {
+  width: 100%;
+  margin: 0;
+  padding: 20px 0;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.tldr-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+}
+
+.tldr-title:before {
+  content: "⚡";
+  margin-right: 10px;
+  font-size: 1.3em;
+}
+
+.tldr-content {
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.tldr-section:after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
+  .tldr-section {
+    padding: 15px 0;
+  }
+  
+  .tldr-title {
+    font-size: 1.3em;
+  }
+  
+  .tldr-content {
+    font-size: 1em;
+  }
+}
+
+/* ============================================
+   COLORED SUBSECTION STYLES
+   ============================================ */
+
+/* Abstract Section - Blue theme */
+.abstract-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f0f4f8;
+    border-left: 4px solid #3498db;
+    border-radius: 4px;
+}
+
+.abstract-title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #3498db;
+}
+
+.abstract-section p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+/* Problem Statement Section - Orange/Yellow theme */
+.problem-statement-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #fef6e6;
+    border-left: 4px solid #f39c12;
+    border-radius: 4px;
+}
+
+.problem-title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #f39c12;
+}
+
+/* Framework Section - Green theme */
+.framework-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #eafaf1;
+    border-left: 4px solid #27ae60;
+    border-radius: 4px;
+}
+
+.framework-title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #27ae60;
+}
+
+/* Algorithm Section - Purple theme */
+.algorithm-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f7f5fe;
+    border-left: 4px solid #9b59b6;
+    border-radius: 4px;
+}
+
+.algorithm-title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #9b59b6;
+}
+
+/* Results/Analysis Section - Light blue theme */
+.results-analysis {
+    margin: 25px 0;
+    padding: 15px;
+    background-color: #f0f7ff;
+    border-left: 4px solid #0d6efd;
+    border-radius: 4px;
+}
+
+/* Experiment Description - Gray theme */
+.experiment-description {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: white;
+    border-left: 4px solid #4a4a4a;
+    border-radius: 4px;
+}
+
+/* Title with lollipop icon */
+.publication-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.title-icon {
+    height: 60px;
+    width: auto;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .title-icon {
+    height: 40px;
+  }
+  
+  .publication-title {
+    gap: 10px;
+  }
+}
+
+/* Section spacing and layout */
+.content-section {
+    margin-bottom: 60px;
+}
+
+/* Expandable benefit boxes - stacked layout */
+.benefits-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.benefit-box {
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.benefit-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(155, 89, 182, 0.3);
+}
+
+.benefit-box.expanded {
+    box-shadow: 0 12px 30px rgba(155, 89, 182, 0.4);
+}
+
+.benefit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.expand-icon {
+    font-size: 1.5em;
+    transition: transform 0.3s ease;
+    color: #9b59b6;
+    flex-shrink: 0;
+    margin-left: 10px;
+}
+
+.benefit-box.expanded .expand-icon {
+    transform: rotate(180deg);
+}
+
+.benefit-summary {
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+
+.benefit-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.5s ease,
+                margin-top 0.4s ease;
+    opacity: 0;
+}
+
+.benefit-box.expanded .benefit-content {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 20px;
+} 
+
+/* Expandable sections - horizontal and vertical expansion */
+.expandable-section {
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
+
+/* Collapsed state - narrower width */
+.expandable-section:not(.expanded) {
+    max-width: 85%;
+}
+
+.expandable-section:hover:not(.expanded) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    max-width: 87%;
+}
+
+/* Expanded state - full width */
+.expandable-section.expanded {
+    max-width: 100%;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.section-tldr {
+    font-size: 1.05em;
+    line-height: 1.6;
+    font-style: italic;
+    color: #555;
+}
+
+.section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.5s ease,
+                margin-top 0.4s ease;
+    opacity: 0;
+}
+
+.expandable-section.expanded .section-content {
+    max-height: 3000px;
+    opacity: 1;
+    margin-top: 20px;
+}
+
+.expand-icon {
+    font-size: 1.5em;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 10px;
+}
+
+.expandable-section.expanded .expand-icon {
+    transform: rotate(180deg);
+}
+
+/* Color-specific icons */
+.problem-statement-section .expand-icon {
+    color: #f39c12;
+}
+
+.abstract-section .expand-icon {
+    color: #3498db;
+}
+
+.framework-section .expand-icon {
+    color: #27ae60;
+}
+
+.algorithm-section .expand-icon {
+    color: #9b59b6;
+}
+
+.results-analysis .expand-icon {
+    color: #0d6efd;
+}
+
+.content-section {
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .expandable-section:not(.expanded) {
+        max-width: 95%;
+    }
+    
+    .expandable-section.expanded {
+        max-width: 100%;
+    }
+}
+
+/* Show bullet points in lists */
+.expandable-section ul {
+    list-style-type: disc;
+    padding-left: 40px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.expandable-section ul li {
+    margin-bottom: 8px;
+    list-style-position: outside;
+}
+
+/* Also fix bullets in nested divs */
+.section-content ul {
+    list-style-type: disc;
+    padding-left: 40px;
+}
+
+.section-content ul li {
+    margin-bottom: 8px;
+}
+
+/* Methodology Section - Cream/Beige theme */
+.methodology-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #faf8f3;
+    border-left: 4px solid #d4a373;
+    border-radius: 4px;
+}
+
+.methodology-title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #d4a373;
+}
+
+.methodology-section .expand-icon {
+    color: #d4a373;
+}
+/* Concurrent Work Sections - Light gray theme */
+.concurrent-work-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f9fafb;
+    border-left: 4px solid #6b7280;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
+
+/* Collapsed state - narrower width */
+.concurrent-work-section:not(.expanded) {
+    max-width: 85%;
+}
+
+.concurrent-work-section:hover:not(.expanded) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(107, 114, 128, 0.3);
+    max-width: 87%;
+}
+
+/* Expanded state - full width */
+.concurrent-work-section.expanded {
+    max-width: 100%;
+    box-shadow: 0 12px 30px rgba(107, 114, 128, 0.4);
+}
+
+.concurrent-work-title {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: #6b7280;
+}
+
+.concurrent-work-section .expand-icon {
+    color: #6b7280;
+}
+
+@media (max-width: 768px) {
+    .concurrent-work-section:not(.expanded) {
+        max-width: 100%;
+    }
+    
+    .concurrent-work-section.expanded {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+</style>
+</head>
+<body>
+
+
+<div class="tldr-section">
+  <div class="container is-max-desktop">
+    <div class="tldr-title">TL;DR</div>
+    <div class="tldr-content">
+      We introduce token identifiability as a framework for understanding continuous noise on discrete data, explain why continuous diffusion has historically underperformed on discrete data, and propose CANDI as a principled solution. 
+    </div>
+  </div>
+</div>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            <img src="./static/images/favicon.png" alt="CANDI" class="title-icon">
+            CANDI: Hybrid Discrete-Continuous Diffusion Models
+            <img src="./static/images/favicon.png" alt="CANDI" class="title-icon">
+          </h1> 
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=UzthxMoAAAAJ&hl=en">Patrick Pynadath</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://jiaxins.io/">Jiaxin Shi</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://ruqizhang.github.io/">Ruqi Zhang</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Purdue University</span>
+            <span class="author-block"><sup>2</sup>Google Deepmind</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="candi.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+   <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+
+    <!-- THE PUZZLE -->
+    <div class="content-section">
+      <div class="problem-statement-section expandable-section">
+        <div class="section-header">
+          <h2 class="problem-title"><span class="section-emoji">🧩</span>The Puzzle</h2>
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="section-tldr">
+          <p>Continuous diffusion dominates images but fails on text. Why?</p>
+        </div>
+        <div class="section-content">
+          <p>
+            Continuous diffusion has revolutionized image generation, but mysteriously 
+            underperforms on discrete data like text. This is puzzling because continuous 
+            models learn score functions that enable:
+          </p>
+          <ul>
+            <li><strong>Smooth gradients</strong> for guidance</li>
+            <li><strong>Coordinated refinement</strong> instead of independent sampling</li>
+          </ul>
+          <p>However, recent work has shifted towards pure discrete diffusion methods that lack these properties. Furthermore, 
+            such methods have generally outperformed their continuous counterparts. <strong>So what's going wrong?</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE ANALYSIS -->
+    <div class="content-section">
+      <div class="abstract-section expandable-section">
+        <div class="section-header">
+          <h2 class="abstract-title"><span class="section-emoji">🔬</span>Our Analysis: Token Identifiability</h2>
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="section-tldr">
+          <p>We introduce a new framework for understanding continuous corruption of discrete data, and discover a "temporal dissonance" - a fundamental misalignment in how continuous noise corrupts discrete data.</p>
+          <img src="static/images/token_identifiability_fig.png" alt="Token Identifiability Fig" style="max-width: 100%; height: auto;">
+        </div>
+        <div class="section-content">
+          <p>
+            We introduce <em>token identifiability</em> as a framework to understand how 
+            Gaussian noise corrupts discrete data through two distinct mechanisms:
+          </p>
+          <ul>
+            <li>
+              <strong>Discrete Identity Corruption:</strong> Tokens become unrecognizable
+              <div style="margin-top: 10px; margin-bottom: 15px;">
+                <img src="equations/disc-corr.png" alt="Discrete Identity Corruption Equation" style="max-width: 100%; height: auto;">
+              </div>
+            </li>
+            <li>
+              <strong>Continuous Rank Degradation:</strong> Embedding geometry collapses
+              <div style="margin-top: 10px; margin-bottom: 15px;">
+                <img src="equations/cont-corr.png" alt="Continuous Rank Degradation Equation" style="max-width: 100%; height: auto;">
+              </div>
+            </li>
+          </ul>
+          <div class="experiment-description" style="margin-top: 20px;">
+            <h4 style="font-size: 1.5em;"><strong>💥 Key Discovery: Temporal Dissonance</strong></h4>
+            <p>
+              These mechanisms scale differently with vocabulary size, creating a fundamental 
+              misalignment: when discrete structure is learnable, continuous denoising is 
+              trivial; when continuous denoising is meaningful, discrete structure is destroyed.
+            </p>
+
+            <div style="margin-top: 10px; margin-bottom: 15px;">
+              <img src="static/images/analytic-vs-empirical.png" alt="Discrete-Continuous Noise" style="max-width: 100%; height: auto;">
+            </div>
+          </div>
+          <!-- ADD MORE CONTENT, DIAGRAMS HERE -->
+        </div>
+      </div>
+    </div>
+
+    <!-- THE SOLUTION -->
+    <div class="content-section">
+      <div class="framework-section expandable-section">
+        <div class="section-header">
+          <h2 class="framework-title"><span class="section-emoji">💡</span>The Solution: CANDI</h2>
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="section-tldr">
+          <p>Decouple discrete and continuous corruption to get the best of both worlds.</p>
+          <img src="static/images/candi-vis.png" alt="CANDI Visualization" style="max-width: 100%; height: auto;">
+        </div>
+        <div class="section-content">
+          <p>
+            <strong>C</strong>ontinuous <strong>AN</strong>d <strong>DI</strong>screte diffusion 
+            solves temporal dissonance with one key insight: <em>decouple the corruptions</em>.
+          </p>
+          <p>
+            By separating discrete and continuous noise schedules, CANDI enables simultaneous 
+            learning of:
+          </p>
+          <ul>
+            <li>Conditional structure (discrete)</li>
+            <li>Continuous geometry (score functions)</li>
+          </ul>
+<div class="experiment-description" style="margin-top: 20px;">
+  <h4 style="font-size: 1.5em;"><strong>💥 Structured Noising Kernel</strong></h4>
+  <p>
+    We introduce a hybrid noising kernel that uses discrete masking corruption to decouple discrete corruption from Gaussian noise. 
+    Paradoxically, decoupling discrete corruption from Gaussian noise allows us to better coordinate both forms of corruption with each other.
+    As we show below, this structured kernel allows for a <strong>linear relation</strong> between discrete identity corruption and continuous rank degradation.
+  </p>
+  
+  <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+    <!-- Left side: Equations list -->
+    <div style="flex: 1; min-width: 300px;">
+      <ul>
+        <li>Gaussian Noise Kernel</li>
+        <div style="margin-top: 10px; margin-bottom: 15px;">
+          <img src="equations/cont-noise-kernel.png" alt="Continuous Noise Kernel" style="max-width: 100%; height: auto;">
+        </div>
+        <li>Masking Noise Kernel</li>
+        <div style="margin-top: 10px; margin-bottom: 15px;">
+          <img src="equations/disc-noise-kernel.png" alt="Discrete Noise Kernel" style="max-width: 100%; height: auto;">
+        </div>
+        <li>Hybrid Noising Kernel</li>
+        <div style="margin-top: 10px; margin-bottom: 15px;">
+          <img src="equations/combined-kernel.png" alt="Hybrid Noising Kernel" style="max-width: 100%; height: auto;">
+        </div>
+      </ul>
+    </div>
+    
+    <!-- Right side: R vs Rho image -->
+    <div style="flex: 1; min-width: 300px; display: flex; align-items: center; justify-content: center;">
+      <img src="static/images/r_vs_rho.png" alt="R vs Rho" style="max-width: 100%; height: auto;">
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    <!-- METHODOLOGY -->
+    <div class="content-section">
+      <div class="methodology-section expandable-section">
+        <div class="section-header">
+          <h2 class="methodology-title"><span class="section-emoji">⚙️</span>Methodology: Frontier Analysis</h2>
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="section-tldr">
+          <p>We use frontier analysis to quantify generative quality and demonstrate why this leads to more robust results than single-point analysis.</p>
+
+        </div>
+        <div class="section-content">
+
+          <p>
+            Temperature is a crucial hyperparameter for text generation, as it allows flexible control between coherence and diversity. 
+            As the same autoregressive model may have different optimal temperatures for different tasks, it follows that completely different diffusion models will have 
+            different optimal operating regions for temperature. A global temperature of 1.0 may correspend to different regions of the diversity-coherence frontier 
+            across differnet models. 
+          </p>
+          <p>
+            To address this, we use <strong>frontier analysis</strong> to evaluate generative quality across a range of temperatures, 
+            plotting the best achievable trade-off between diversity and coherence.
+            We use this methodology across all experiments, as the cost of the temperature sweep is negligible compared to training the models themselves. 
+            This allows us to compare models based on their overall capabilities rather than at a single operating point.
+          </p>
+
+        <div class="experiment-description" style="margin-top: 20px;">
+          <h4 style="font-size: 1.5em;"><strong>💥 Single Temperature Trap</strong></h4>
+
+          <div style="margin-top: 10px; margin-bottom: 15px;">
+            <img src="static/images/temperature-tuning-comparisons.png" alt="Single point evals with tuning" style="max-width: 100%; height: auto;">
+          </div>
+          <p>Here we compare CANDI, Duo, and MDLM across different temperatures to demonstrate that rankings can change significantly based on the temperatures.
+            All methods lie within the same general range of entropy and perplexity, but the relative performance varies significantly based on temperature choice.
+          </p>
+          <ul>
+            <li> <strong>SAME</strong> base models within each graph</li>
+            <li> <strong>SAME</strong> range of entropy within each graph</li>
+            <li><strong>DIFFERENT</strong> relative performances</li>
+          </ul>
+        </div>
+
+       </div>
+
+      </div>
+    </div>
+    <!-- VALIDATION -->
+    <div class="content-section">
+      <div class="results-analysis expandable-section">
+        <div class="section-header">
+          <h2 style="font-size: 1.8em; margin-bottom: 15px; color: #0d6efd;">
+            <span class="section-emoji">✓</span>Theory Meets Practice
+          </h2>
+          <span class="expand-icon">▼</span>
+        </div>
+
+        <div class="section-tldr">
+          <p>Our theory of token identifiability and the temporal dissonance predict the following:</p>
+          <ul>
+            <li>Continuous diffusion perform well with small number of categories, since temporal dissonance is minimal.</li>
+            <li>Continuous diffusion collapses with large number of categories, when temporal dissonance is severe.</li>
+            <li>CANDI effectively solves the temporal dissonance, leading to improved performance across both regimes of category sizes.</li>
+          </ul>
+          Using Text8 (27 categories) and OpenWebText (50257 categories), we validate these predictions empirically.
+
+ 
+        </div>
+        <div class="section-content">
+          We train two pure continuous diffusion models: 
+          <ul>
+            <li>
+              <strong>One-Hot Diffusion:</strong> Diffusion directly on one-hot vectors with Gaussian noise.
+            </li>
+            <li>
+              <strong>Embedding Diffusion:</strong> Diffusion on token embeddings with Gaussian noise.
+            </li>
+          </ul>
+          We also train a masked diffusion method (MDLM) and CANDI. 
+          For both datasets, we keep the architecture, learning rate, batch size to be the same to eliminate confounders.
+          In order to separate difficulty of the dataset from the analysis, we use diversity / coherence metrics specific to each dataset and 
+          use relative performance to MDLM to measure performance.
+          <div class="experiment-description" style="margin-top: 20px;">
+          <h4 style="font-size: 1.5em;"><strong>💥 Empirical Validation of Temporal Dissonance</strong></h4>
+          <div style="margin-top: 10px; margin-bottom: 15px;">
+            <img src="static/images/text8-frontier-ablation.png" alt="Text8 Frontiers" style="max-width: 100%; height: auto;">
+            <img src="static/images/owt-frontier-ablation-log.png" alt="OWT Frontiers" style="max-width: 100%; height: auto;">
+          </div>
+
+          <p>
+            We validate that temporal dissonance exists in continuous diffusion baselines 
+            and demonstrate that CANDI successfully avoids it.
+          </p>
+          <ul style="list-style: none; padding-left: 0;">
+            <li>✅ <em>Both one-hot and embedding diffusion achieve similar frontiers to MDLM and CANDI, especially at low NFE</em></li>
+            <li>✅ <em>Both one-hot and embedding diffusion fail on OWT, either suffering from completely random outputs or mode collapse</em></li>
+            <li>✅ <em>CANDI either matches or surpasses MDLM performance both at low and high number of categories</em></li>
+          </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENEFITS -->
+    <div class="content-section">
+      <h2 class="title is-3" style="text-align: center; margin-bottom: 40px;">
+        <span class="section-emoji">🚀</span>Why Continuous Geometry Matters
+      </h2>
+      
+      <div style="display: flex; flex-direction: column; gap: 30px;">
+        <!-- Benefit 1 -->
+        
+        <!-- Benefit 2 -->
+        </div>
+      </div>
+        <div class="algorithm-section expandable-section">
+          <div class="section-header">
+            <h3 class="algorithm-title">Benefit 1: Better Low-NFE Performance</h3>
+            <span class="expand-icon">▼</span>
+          </div>
+          <div class="section-tldr">
+            <p>Coordinated refinement across positions beats independent token sampling.</p>
+          </div>
+          <div class="section-content">
+            <p>
+              Continuous gradients enable <strong>coordinated refinement</strong> across 
+              positions, rather than independent token sampling.
+              To demonstrate this, we train a 170 million parameter CANDI model with the diffusion transformer architecture on OWT for 1,000,000 steps. 
+              We compare against a strong masked diffusion baseline (MDLM) and a strong uniform diffusion baseline (DUO), using the official checkponts provided by the authors and the same model architecture.
+            </p>
+
+            <div class="section-content">
+              <div class="experiment-description" style="margin-top: 20px;">
+              <h4 style="font-size: 1.5em;"><strong>💥 Improved Performance at Low NFE</strong></h4>
+              <div style="margin-top: 10px; margin-bottom: 15px;">
+                <img src="static/images/method_comparison_by_steps_short.png" alt="Low NFE Frontiers" style="max-width: 100%; height: auto;">
+              </div>
+              Key observations: 
+              <ul>
+                <li>At low NFE (8-16), CANDI outperforms MDLM by a significant margin at all entropy values</li>
+                <li>MDLM surpasses DUO for all perplexity below 40 at all NFE</li>
+              </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+              <div class="algorithm-section expandable-section">
+          <div class="section-header">
+            <h3 class="algorithm-title">Benefit 2: Plug-and-Play Guidance</h3>
+            <span class="expand-icon">▼</span>
+          </div>
+          <div class="section-tldr">
+
+            <p>Learning continuous gradients allow for plug-and-play guidance with off-the-shelf classifiers.</p>
+         </div>
+          <div class="section-content">
+            <p>Prior guidance methods for discrete diffusion require specially trained classifiers for each diffusion model.</p>
+            <p>Furthermore, the gradient information must be adapted to suit the categorical distributions used at inference for pure discrete diffusion methods</p>
+            <p>In contrast, CANDI can leverage off-the-shelf continuous classifiers for guidance with <strong>simple gradient addition</strong>.</p>
+
+            <p>We use the QM9 molecular dataset and compare against MDLM and UDLM using diffusion classifiers. We train classifers on two chemical properties: QED and ring count. For CANDI, we train a normal classifier without any diffusion-specific augmentations. </p>
+            <p>We visualize frontiers in terms of target property value (coherence) and novel molecules (diversity). We ablate over temperature and show the best frontiers for each method.</p>
+            <div class="experiment-description" style="margin-top: 20px;">
+              <h4 style="font-size: 1.5em;"><strong>💥 Competitive Performance with Off-the-Shelf Classifiers</strong></h4>
+              <div style="margin-top: 10px; margin-bottom: 15px;">
+                <img src="static/images/molecular_frontier_comp.png" alt="Molecular Frontier Comparison" style="max-width: 100%; height: auto;">
+              </div>
+              Key observations:
+              <ul>
+                <li>Using an off-the-shelf continuous classifier, CANDI achieves comparable performance to a discrete diffusion method with a specially trained classifier.</li>
+                <li>CANDI has a strictly better frontier when compared to MDLM for both properties and both NFE</li>
+              </div>
+             <!-- ADD YOUR COMPARISON TABLE HERE: Text8 vs OWT, MDLM vs Continuous vs CANDI -->
+            </p>
+          </div>
+
+    </div>
+<!-- Concurrent Work 1 -->
+<div class="content-section">
+  <h2 class="title is-3" style="text-align: center; margin-bottom: 40px;">
+    <span class="section-emoji">📚</span>Concurrent Works
+  </h2>
+  <div class="concurrent-work-section expandable-section">
+    <div class="section-header">
+      <h3 class="concurrent-work-title">Continuously Augmented Discrete Diffusion model for Categorical Generative Modeling </h3>
+      <h3>Huangjie Zheng <em>et al</em>, October 2025</h3>
+      <span class="expand-icon">▼</span>
+    </div>
+    <div class="section-tldr">
+      <p>Augments masked diffusion with continuous diffusion in embedding space to address "information void"</p>
+      <p>
+        <a href="https://arxiv.org/pdf/2510.01329" target="_blank">Paper Link</a>
+      </p>
+    </div>
+    <div class="section-content">
+      <p>
+        <strong>Key contributions:</strong>
+      </p>
+      <ul>
+        <li>Proposes augmented diffusion process, using both discrete masked diffusion and continuous Gaussian diffusion</li>
+        <li>Leverages continuous diffusion to interpolate between mode covering and mode seeking sampling modes</li>
+        <li>Demonstrate impressive performance across range of modalities and tasks, including coding</li>
+      </ul>
+      <p>
+        <strong>Relationship to CANDI:</strong> 
+      </p>
+      <ul>
+        <li>Both works combine masked and continuous Gaussian diffusion</li>
+        <li>We focus on <strong>establishing a framework for understanding</strong> gaussian diffusion on discrete spaces. They focus on demonstrating the empirical success of hybrid methods across modalities.</li>
+        <li>We provide a <strong>theoretically and empirically validated </strong>explanation for why hybrid diffusion methods succeed where continuous gaussian methods have failed. They arrive at hybrid diffusion by trying to fix a flaw with masked diffusion.</li>
+
+    </div>
+  </div>
+
+  <div class="concurrent-work-section expandable-section">
+    <div class="section-header">
+      <h3 class="concurrent-work-title">Coevolutionary Continuous Discrete Diffusion: Make Your Diffusion Language Model a Latent Reasoner</h3>
+      <h3>Cai Zhou <em>et al</em>, October 2025</h3>
+      <span class="expand-icon">▼</span>
+    </div>
+    <div class="section-tldr">
+      <p>Introduces CCDD, a joint multimodal diffusion process to combine the expressivity of continuous diffusion and trainability of discrete diffusion</p>
+      <p>
+        <a href="https://www.arxiv.org/pdf/2510.03206" target="_blank">Paper Link</a>
+      </p>
+    </div>
+    <div class="section-content">
+      <p>
+        <strong>Key contributions:</strong>
+      </p>
+      <ul>
+        <li>Demonstrates that continuous diffusion is strictly more expressive than discrete diffusion</li>
+        <li>Point towards trainability difficulties of continuous diffusion as limiting factor</li>
+        <li>Propose to use joint diffusion on both discrete and continuous space to address trainability issue</li>
+      </ul>
+      <p>
+        <strong>Relationship to CANDI:</strong> 
+      </p>
+      <ul>
+        <li>Both identify the trainability issue of continuous diffusion for discrete spaces</li>
+        <li>We provide a <strong>concrete mechanism</strong> that makes continuous diffusion more difficult to train than discrete diffusion through token identifiability and temporal dissonance. They focus on demonstrating the theoretical superiority of continuous diffusion over discrete diffusion.</li>
+        <li>We focus on <strong>low nfe</strong> and <strong>simpler guidance</strong>, which are <strong>specific capabilities</strong> that Gaussian diffusion provides that are not available in discrete spaces. They focus on likelihood evaluations and general sample quality.</li>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- RELATED LINKS -->
+  </div>
+</section>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{pynadath2025candi,
+  author    = {Patrick Pynadath, Jiaxin Shi and Ruqi Zhang},
+  title     = {CANDI: Hybrid Discrete-Continuous Diffusion Models},
+  journal   = {arXiv preprint},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="#">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="#" class="external-link">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website template is based on the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies project page</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+// Expandable sections - all sections
+document.addEventListener('DOMContentLoaded', function() {
+  const expandableSections = document.querySelectorAll('.expandable-section');
+  
+  expandableSections.forEach(section => {
+    section.addEventListener('click', function() {
+      const isExpanded = this.classList.contains('expanded');
+      
+      // Toggle expansion
+      if (isExpanded) {
+        this.classList.remove('expanded');
+      } else {
+        this.classList.add('expanded');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
