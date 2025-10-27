@@ -672,8 +672,18 @@
           <div class="experiment-description" style="margin-top: 20px;">
             <h4 style="font-size: 1.5em;"><strong>💥 Key Discovery: Temporal Dissonance</strong></h4>
             <p>
-              These mechanisms scale differently with vocabulary size, creating a fundamental 
-              misalignment: when discrete structure is learnable, continuous denoising is 
+              <strong>Discrete identity corruption</strong> controls how the model learns <strong>conditional dependencies</strong> between tokens. 
+              Unlike images, where nearby pixels share values due to spatial smoothness, discrete sequences lack geometric continuity: 
+              conditionally related tokens such as "New" and "York" have entirely different identities. 
+              To capture such co-occurrence patterns, the model must see clean anchor tokens during training.
+            </p>
+            <p>
+              <strong>Continuous rank degradation</strong> controls how the model learns the score function via continuous denoising, enabling <strong>coordinated refinement across positions.</strong> 
+              This gradient signal is the key strength of continuous diffusion: it allows multiple positions jointly evolve at once. 
+              Without access to a continuous score function, updates rely on independent conditional sampling, which leads to incoherent generations, especially at low NFE where many positions must be updated in parallel.
+            </p>
+            <p>
+              These mechanisms scale differently with vocabulary size, creating a <strong>temporal dissonance</strong>: when discrete structure is learnable, continuous denoising is 
               trivial; when continuous denoising is meaningful, discrete structure is destroyed.
             </p>
 
